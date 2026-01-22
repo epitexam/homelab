@@ -1,0 +1,9 @@
+.env
+*.env
+
+**/adguard/
+**/config/
+**/data/
+**/cache/
+
+.DS_Store

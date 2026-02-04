@@ -1,8 +1,16 @@
 #!/bin/bash
 
 # Load variables from .env file (to get UID/GID)
-if [ -f .env ]; then
-    export $(grep -v '^#' .env | xargs)
+if [ ! -f .env ]; then
+    if [ -f .env.example ]; then
+        cp .env.example .env
+        echo ".env file created from .env.example"
+    else
+        echo "Error: .env.example not found"
+        exit 1
+    fi
+else
+    echo ".env file already exists, skipping creation"
 fi
 
 # Set default UID/GID if not found in .env

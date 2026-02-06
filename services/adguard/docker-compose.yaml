@@ -10,8 +10,17 @@ services:
       - "53:53/udp"
       - "${SERVER_IP}:8081:80/tcp"
       - "${SERVER_IP}:3000:3000/tcp"
+    
     volumes:
-      - ./adguard/work:/opt/adguardhome/work
-      - ./adguard/conf:/opt/adguardhome/conf
+      - ./data/work:/opt/adguardhome/work
+      - ./data/conf:/opt/adguardhome/conf
+    
     environment:
       - TZ=${TZ}
+    
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s

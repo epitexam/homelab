@@ -1,11 +1,24 @@
+# Secrets and environment variables
 .env
+.env.local
 *.env
 
-**/adguard/
+# Persistent data (Docker volumes)
 **/config/
 **/data/
 **/cache/
-**/fonts/
+**/logs/
 **/media*/
+**/fonts/
 
+# System files
 .DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# IDE
+.vscode/
+.idea/
+*.code-workspace

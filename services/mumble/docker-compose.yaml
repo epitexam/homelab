@@ -1,0 +1,30 @@
+services:
+  mumble-server:
+    image: mumblevoip/mumble-server:latest
+    container_name: mumble-server
+    hostname: mumble-server
+    restart: unless-stopped
+
+    ports:
+      - "64738:64738/tcp"
+      - "64738:64738/udp"
+
+    volumes:
+      - ./data/mumble:/data
+
+    environment:
+      MUMBLE_CONFIG_WELCOMETEXT: "${MUMBLE_WELCOME_TEXT}"
+      MUMBLE_CONFIG_USERS: ${MUMBLE_MAX_USERS}
+      MUMBLE_CONFIG_ALLOWPING: ${MUMBLE_ALLOW_PING}
+      MUMBLE_CONFIG_SENDVERSION: ${MUMBLE_SEND_VERSION}
+      MUMBLE_SUPERUSER_PASSWORD: "${MUMBLE_SUPERUSER_PASSWORD}"
+      MUMBLE_VERBOSE: ${MUMBLE_VERBOSE}
+      PUID: ${MUMBLE_PUID}
+      PGID: ${MUMBLE_PGID}
+
+    deploy:
+      resources:
+        limits:
+          memory: ${MEM_LIMIT}
+        reservations:
+          memory: ${MEM_RESERVE}
